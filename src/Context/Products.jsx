@@ -10,7 +10,7 @@ export const  ProductContext = createContext({
 
 export const ProductProvider = ({children})=>{
     const addProducts = () =>{
-        console.log(defaultProducts)
+        // console.log(defaultProducts)
     }
     const values = {
         productList:defaultProducts,
