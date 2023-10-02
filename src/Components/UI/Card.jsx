@@ -9,7 +9,7 @@ function UICard(props) {
       <Card.Body>
         <Card.Title>{item.title}</Card.Title>
         <Card.Text>{props.text}</Card.Text>
-        <Button variant="primary">Add to cart</Button>
+        <Button onClick={()=>props.addToCart(item)} variant="primary">{props.buttonAction}</Button>
       </Card.Body>
     </Card>
   );

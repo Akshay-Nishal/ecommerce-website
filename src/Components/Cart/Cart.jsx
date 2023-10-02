@@ -6,6 +6,7 @@ import CartItem from './CartItem';
 
 export default function Cart(props) {
     const cartCtx = useContext(CartContext)
+    let showcartitems=cartCtx.cartNumber
     // console.log(cartCtx.cartList)
   return (
     <div className='cartDiv'>
@@ -13,17 +14,25 @@ export default function Cart(props) {
             <h2>Cart</h2>
             <Button onClick={props.cartStateChange} variant="danger">X</Button>
         </div>
-        {cartCtx.cartList.map((item)=>{
-            return(
-                <CartItem
-                key={item.title}
-                data={item}
-                />
-                )
-            })}
-        <center>
-            <Button  id='placeOrder'  style={{}} variant='primary'>Place Order</Button>
-        </center>
+        {showcartitems>0?
+        <>
+            {cartCtx.cartList.map((item)=>{
+                return(
+                    <CartItem
+                    key={item.title}
+                    data={item}
+                    />
+                    )
+                })}
+            <span id='totalAmount' >Total: $ {cartCtx.totalAmount.toFixed(2)}</span>
+            <center>
+                <Button onClick={cartCtx.onOrder}  id='placeOrder'  style={{}} variant='primary'>Place Order</Button>
+            </center>
+        </>
+        :
+        <h4>Cart is Empty!!!!</h4>  
+        }      
     </div>
   )
 }
+

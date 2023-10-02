@@ -25,7 +25,7 @@ const HeaderNav = (props) =>{
           </Nav>
           <Button onClick={displayCart}>
             <img style={{height:'25px'}} id='cartButtonImg' src={cartLink} alt="Cart" />
-            <b style={{fontSize:'18px',color:'black'}}> {cartCtx.cartList.length}</b>
+            <b style={{fontSize:'18px',color:'black'}}> {cartCtx.cartNumber}</b>
           </Button>
         </Container>
       </Navbar>
