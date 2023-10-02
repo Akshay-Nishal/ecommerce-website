@@ -5,23 +5,26 @@ import Button from 'react-bootstrap/Button';
 import Title from './Title';
 import { useContext } from 'react';
 import { CartContext } from '../../Context/CartContext';
+import { BrowserRouter, Route, Link, NavLink, Routes} from 'react-router-dom';
+import Home from '../Body/Home';
+import About from '../Body/About';
+import Products from '../Body/Products';
+
 const cartLink = "https://imgs.search.brave.com/egBQQoJER66Hva1MI_mYgPeg2tWVYhCmuX2plYog1UM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudGhlbm91bnBy/b2plY3QuY29tL3Bu/Zy82MTIxNDc1LTIw/MC5wbmc"
-
-
 const HeaderNav = (props) =>{
   const cartCtx = useContext(CartContext)
   const displayCart = () =>{
     props.cartStateChange()
   }
   return (
-    <>
+    <BrowserRouter>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Shop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/products">Products</Nav.Link>
+            <Nav.Link as={Link} to="/about">About</Nav.Link>
           </Nav>
           <Button onClick={displayCart}>
             <img style={{height:'25px'}} id='cartButtonImg' src={cartLink} alt="Cart" />
@@ -30,7 +33,12 @@ const HeaderNav = (props) =>{
         </Container>
       </Navbar>
       <Title/>
-    </>
+      <Routes>
+        <Route path="/" element={<Home/>}t ></Route>
+        <Route path="/products" element={<Products/>} ></Route>
+        <Route path="/about" element={<About/>} ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
