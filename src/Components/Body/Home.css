@@ -1,0 +1,59 @@
+.homePage{}
+
+
+.homePageTop{
+    background-color: gray;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.carouselDiv{
+    border-radius: 20px;
+    background-color: white;
+    max-height: 200px;
+    overflow: hidden;
+    max-width: 400px;
+    min-width: 400px;
+    /* width: fit-content; */
+}
+
+
+.homePageBottom{
+    margin-bottom: 50px;
+}
+.homePageBottom h2{
+    margin-top: 35px;
+}
+
+
+.storeLocation{
+    margin-right: 20px;
+    font-size: 20px;
+    color: red;
+}
+
+
+.storeName{
+    margin-right: 20px;
+    font-size: 20px;
+    color: blue;
+}
+
+
+.storeItem{
+width: 500px;
+margin-top: 10px;
+display: flex;
+justify-content: space-around;
+}
+.storeItem img{
+    cursor: pointer;
+    transition: .25s;
+    height: 35px;
+}
+
+.storeItem img:hover{
+    scale: 1.25;
+}

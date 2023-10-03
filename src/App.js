@@ -3,6 +3,7 @@ import './App.css';
 import Products from './Components/Body/Products';
 import Cart from './Components/Cart/Cart';
 import HeaderNav from './Components/Header/HeaderNav';
+import Footer from './Components/Foorer/Footer';
 function App() {
   const [cartState,setCartState] = useState(false)
   const cartStateChange =()=>{
@@ -17,6 +18,7 @@ function App() {
       :
         <></>
       }
+      <Footer/>
     </>
   )
 }
