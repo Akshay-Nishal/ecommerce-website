@@ -23,7 +23,7 @@ export default function Home() {
           <div className='storeList'>
             {stores.map((store)=>{
               return(
-                <div className='storeItem'>
+                <div key={store.storename} className='storeItem'>
                   <span className='storeLocation'>{store.location}</span>
                   <span className='storeName'>{store.storename}</span>
                   <img src="https://imgs.search.brave.com/LFu4-Q7eoXvrR7COYKXY-gkWj2GpO9x7yXulmLpW0hw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvODU0Lzg1NDg3/OC5wbmc" alt="Location" />

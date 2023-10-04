@@ -1,0 +1,28 @@
+.contactusDiv{
+    padding: 50px;
+    background-color: rgb(212, 212, 212);
+
+}
+
+#contactUSForm{
+    display: flex;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#contactUSForm label{
+    margin-bottom: 5px;
+}
+#contactUSForm input{
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+#contactUSForm button{
+    border-radius: 10px;
+    border: 2px solid grey;
+    width: 150px;
+
+}
