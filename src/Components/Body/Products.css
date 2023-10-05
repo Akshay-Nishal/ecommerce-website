@@ -1,6 +1,12 @@
 .productsDiv{
     margin: 50px;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: start;
+}
+
+.card{
+
+
 }

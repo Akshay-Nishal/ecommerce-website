@@ -5,11 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Title from './Title';
 import { useContext } from 'react';
 import { CartContext } from '../../Context/CartContext';
-import { BrowserRouter, Route, Link, NavLink, Routes} from 'react-router-dom';
-import Home from '../Body/Home';
-import About from '../Body/About';
-import Products from '../Body/Products';
-import ContactUS from '../Body/ContactUS';
+import { Link} from 'react-router-dom';
 
 const cartLink = "https://imgs.search.brave.com/egBQQoJER66Hva1MI_mYgPeg2tWVYhCmuX2plYog1UM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudGhlbm91bnBy/b2plY3QuY29tL3Bu/Zy82MTIxNDc1LTIw/MC5wbmc"
 const HeaderNav = (props) =>{
@@ -18,7 +14,7 @@ const HeaderNav = (props) =>{
     props.cartStateChange()
   }
   return (
-    <BrowserRouter>
+    <>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">Shop</Navbar.Brand>
@@ -35,13 +31,7 @@ const HeaderNav = (props) =>{
         </Container>
       </Navbar>
       <Title/>
-      <Routes>
-        <Route path="/" element={<Home/>}t ></Route>
-        <Route path="/products" element={<Products/>} ></Route>
-        <Route path="/about" element={<About/>} ></Route>
-        <Route path="/contactus" element={<ContactUS/>} ></Route>
-      </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

@@ -20,7 +20,8 @@ export default function Products() {
         prodCtx.productList.map((item)=>{
             return(
                   <UICard 
-                key={item.title}
+                  className='card'
+                key={item.id}
                 data={item}
                 text={'Price: $'+item.price}
                 buttonAction={'Add to cart'}
