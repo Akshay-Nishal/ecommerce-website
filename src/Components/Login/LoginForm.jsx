@@ -19,8 +19,41 @@ const LoginForm = () => {
     event.preventDefault()
     const enteredEmail = emailInputRef.current.value
     const enteredPass = passInputRef.current.value
-    console.log("Login ",enteredEmail,enteredPass)
+    // console.log("Login ",enteredEmail,enteredPass)
     if(isLogin){
+        fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
+        {
+            method:'POST',
+            body:JSON.stringify({
+                email:enteredEmail,
+                password:enteredPass,
+                returnSecureToken:true
+            }),
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
+        .then(res=>{
+            setLoading(false)
+            if(res.ok){
+                return(res.json())
+            }
+            else{
+                return res.json().then(data=>{
+                    let errorMessage = 'Authentication Failed!'
+                    throw new Error(errorMessage)
+                })
+            }
+        })
+        .then(data=>{
+            console.log(data)
+        })
+        .catch(error=>{
+            window.alert(error)
+            console.log(error)
+        })
+
+    
 
     }
     else{
@@ -38,17 +71,24 @@ const LoginForm = () => {
             }
         })
         .then(res=>{
+            setLoading(false)
             if(res.ok){
-                console.log(res);
-                setLoading(false)
+                return(res.json())
             }
             else{
                 return res.json().then(data=>{
-                    setLoading(false)
-                    window.alert(data.error.message)
-
+                    let errorMessage = 'Email Already Exists!'
+                    throw new Error(errorMessage)
+                    
                 })
             }
+        })
+        .then(data=>{
+            console.log(data)
+        })
+        .catch(error=>{
+            window.alert(error)
+            console.log(error)
         })
     }
   }
