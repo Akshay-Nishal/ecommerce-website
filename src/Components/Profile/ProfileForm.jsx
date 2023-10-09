@@ -1,12 +1,15 @@
 import { useContext, useRef, useState } from 'react';
 import classes from './ProfileForm.module.css';
 import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom'
 const API_KEY = 'AIzaSyD_wbBxYY-wn1p-CwM8sMA8OSqKorbLUSI'
 
 
 
 const ProfileForm = () => {
   const userCtx = useContext(UserContext)
+  const history = useNavigate()
+
   const newPassRef = useRef()
   const [sizeAlert,setSizeAlert] = useState(false)
   // console.log(userCtx.currentUserData.idToken)
@@ -44,6 +47,9 @@ const ProfileForm = () => {
     })
     .then(data=>{
         console.log(data)
+        history('/', { replace: true })
+
+
     })
     .catch(error=>{
         console.log(error)

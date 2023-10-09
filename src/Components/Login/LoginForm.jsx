@@ -1,10 +1,15 @@
 import { useState, useRef, useContext } from 'react';
 import classes from './LoginForm.module.css';
 import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom'
+// import { unstable_HistoryRouter } from 'react-router-dom';
 const API_KEY = 'AIzaSyD_wbBxYY-wn1p-CwM8sMA8OSqKorbLUSI'
 
+
 const LoginForm = () => {
-    const userCtx = useContext(UserContext)
+  // const history = unstable_HistoryRouter()
+  const history = useNavigate()
+  const userCtx = useContext(UserContext)
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading,setLoading] = useState(false)
   const [isError,setError] = useState()
@@ -50,6 +55,7 @@ const LoginForm = () => {
             console.log(data)
             userCtx.setlogin(true)
             userCtx.setCurrentUserData(data)
+            history('/', { replace: true })
         })
         .catch(error=>{
             window.alert(error)
