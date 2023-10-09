@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import './ContactUS.css'
-const apiUrl = 'https://ecom-fd364-default-rtdb.asia-southeast1.firebasedatabase.app/ContactUS.json'
+const apiUrl = 'https://react-ecom-f4305-default-rtdb.asia-southeast1.firebasedatabase.app/ContactUS.json'
 
 function ContactForm() {
     const nameRef = useRef()

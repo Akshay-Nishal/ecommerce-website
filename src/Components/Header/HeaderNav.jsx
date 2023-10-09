@@ -24,6 +24,11 @@ const HeaderNav = (props) =>{
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/contactus">Contact US</Nav.Link>
           </Nav>
+          <Nav>
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="">Profile</Nav.Link>
+            <Button variant='secondary' className='logoutButton'>Logout</Button>
+          </Nav>
           <Button onClick={displayCart}>
             <img style={{height:'25px'}} id='cartButtonImg' src={cartLink} alt="Cart" />
             <b style={{fontSize:'18px',color:'black'}}> {cartCtx.cartNumber}</b>
