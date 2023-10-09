@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react';
-
+import { useState, useRef, useContext } from 'react';
 import classes from './LoginForm.module.css';
+import { UserContext } from '../../Context/UserContext';
 const API_KEY = 'AIzaSyD_wbBxYY-wn1p-CwM8sMA8OSqKorbLUSI'
 
 const LoginForm = () => {
+    const userCtx = useContext(UserContext)
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading,setLoading] = useState(false)
   const [isError,setError] = useState()
@@ -47,6 +48,8 @@ const LoginForm = () => {
         })
         .then(data=>{
             console.log(data)
+            userCtx.setlogin(true)
+            userCtx.setCurrentUserData(data)
         })
         .catch(error=>{
             window.alert(error)

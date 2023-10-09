@@ -7,15 +7,19 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css"
 import '../node_modules/react-bootstrap/dist/react-bootstrap'
 import { ProductProvider } from './Context/Products';
 import { CartProvider } from './Context/CartContext';
+import { UserProvider } from './Context/UserContext';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <ProductProvider>
-    <CartProvider>
-    <App />
-    </CartProvider>
-  </ProductProvider>
+  <UserProvider>
+    <ProductProvider>
+      <CartProvider>
+      <App />
+      </CartProvider>
+    </ProductProvider>
+  </UserProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

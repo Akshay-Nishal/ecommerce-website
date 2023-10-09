@@ -10,6 +10,8 @@ import About from './Components/Body/About';
 import ContactUS from './Components/Body/ContactUS';
 import ProductDetails from './Components/Body/ProductDetails';
 import LoginPage from './Components/Login/LoginPage';
+import ProfilePage from './Components/Profile/ProfilePage';
+
 
 
 
@@ -33,6 +35,7 @@ function App() {
         <Route path="/products" element={<Products/>} ></Route>
         <Route path="/about" element={<About/>} ></Route>
         <Route path="/contactus" element={<ContactUS/>} ></Route>
+        <Route path="/profile" element={<ProfilePage/>} ></Route>
         <Route path="/login" element={<LoginPage/>} ></Route>
         <Route path="/products/:productID" element={<ProductDetails/>} ></Route>
       </Routes>
