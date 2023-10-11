@@ -12,6 +12,7 @@ import ProductDetails from './Components/Body/ProductDetails';
 import LoginPage from './Components/Login/LoginPage';
 import ProfilePage from './Components/Profile/ProfilePage';
 import { UserContext } from './Context/UserContext';
+import { clear } from '@testing-library/user-event/dist/clear';
 
 
 
@@ -21,16 +22,27 @@ import { UserContext } from './Context/UserContext';
 function App() {
   const userCtx = useContext(UserContext)
   const [cartState,setCartState] = useState(false)
+  // const [timeRem,setTimeRem] = useState(0)
   const cartStateChange =()=>{
     setCartState(prev=>!(prev))
     // console.log("State Changed to: ",cartState)
   }
   useEffect(() => {
-    if(localStorage.getItem('isLogin') && localStorage.getItem('currentUserData')){
+    let ctim = new Date()
+    let timRem = Math.abs(ctim.getMinutes() - parseInt(localStorage.getItem('time')))
+    console.log("Remaning time : ",timRem)
+    if(timRem>5){
+      userCtx.setlogin(false)
+      userCtx.setCurrentUserData('')
+      localStorage.clear()
+    }
+    else if(localStorage.getItem('isLogin') && localStorage.getItem('currentUserData')){
       userCtx.setlogin(localStorage.getItem('isLogin'))
       userCtx.setCurrentUserData(JSON.parse(localStorage.getItem('currentUserData')))
     }
   }, [])
+  
+
   
   return (
     <BrowserRouter>

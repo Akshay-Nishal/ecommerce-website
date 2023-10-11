@@ -19,8 +19,7 @@ const HeaderNav = (props) =>{
   const logoutHandler = () =>{
     userCtx.setCurrentUserData('')
     userCtx.setlogin(false)
-    localStorage.removeItem('isLogin')
-    localStorage.removeItem('currentUserData')
+    localStorage.clear()
   }
   return (
     <>

@@ -57,6 +57,8 @@ const LoginForm = () => {
             userCtx.setCurrentUserData(data)
             localStorage.setItem('isLogin',true)
             localStorage.setItem('currentUserData',JSON.stringify(data))
+            var ctime = new Date()
+            localStorage.setItem('time',ctime.getMinutes())
             history('/', { replace: true })
         })
         .catch(error=>{
