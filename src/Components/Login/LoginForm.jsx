@@ -55,6 +55,8 @@ const LoginForm = () => {
             console.log(data)
             userCtx.setlogin(true)
             userCtx.setCurrentUserData(data)
+            localStorage.setItem('isLogin',true)
+            localStorage.setItem('currentUserData',JSON.stringify(data))
             history('/', { replace: true })
         })
         .catch(error=>{

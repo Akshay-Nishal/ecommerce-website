@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './App.css';
 import Cart from './Components/Cart/Cart';
 import HeaderNav from './Components/Header/HeaderNav';
 import Footer from './Components/Foorer/Footer';
-import { BrowserRouter, Route, Link, NavLink, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Link, NavLink, Routes, Navigate} from 'react-router-dom';
 import Home from './Components/Body/Home';
 import Products from './Components/Body/Products';
 import About from './Components/Body/About';
@@ -11,17 +11,27 @@ import ContactUS from './Components/Body/ContactUS';
 import ProductDetails from './Components/Body/ProductDetails';
 import LoginPage from './Components/Login/LoginPage';
 import ProfilePage from './Components/Profile/ProfilePage';
+import { UserContext } from './Context/UserContext';
+
 
 
 
 
 
 function App() {
+  const userCtx = useContext(UserContext)
   const [cartState,setCartState] = useState(false)
   const cartStateChange =()=>{
     setCartState(prev=>!(prev))
     // console.log("State Changed to: ",cartState)
   }
+  useEffect(() => {
+    if(localStorage.getItem('isLogin') && localStorage.getItem('currentUserData')){
+      userCtx.setlogin(localStorage.getItem('isLogin'))
+      userCtx.setCurrentUserData(JSON.parse(localStorage.getItem('currentUserData')))
+    }
+  }, [])
+  
   return (
     <BrowserRouter>
       <HeaderNav cartStateChange={cartStateChange}/>
@@ -35,8 +45,9 @@ function App() {
         <Route path="/products" element={<Products/>} ></Route>
         <Route path="/about" element={<About/>} ></Route>
         <Route path="/contactus" element={<ContactUS/>} ></Route>
-        <Route path="/profile" element={<ProfilePage/>} ></Route>
-        <Route path="/login" element={<LoginPage/>} ></Route>
+        { userCtx.isLogin && <Route path="/profile" element={<ProfilePage/>} ></Route>}
+        { !userCtx.isLogin && <Route path="/login" element={<LoginPage/>} ></Route>}
+        <Route path="*" element={<Navigate to='/'/>} ></Route>
         <Route path="/products/:productID" element={<ProductDetails/>} ></Route>
       </Routes>
       <Footer/>
