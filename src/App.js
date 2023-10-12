@@ -12,7 +12,6 @@ import ProductDetails from './Components/Body/ProductDetails';
 import LoginPage from './Components/Login/LoginPage';
 import ProfilePage from './Components/Profile/ProfilePage';
 import { UserContext } from './Context/UserContext';
-import { clear } from '@testing-library/user-event/dist/clear';
 
 
 
@@ -21,6 +20,8 @@ import { clear } from '@testing-library/user-event/dist/clear';
 
 function App() {
   const userCtx = useContext(UserContext)
+  // const history = useNavigate()
+
   const [cartState,setCartState] = useState(false)
   // const [timeRem,setTimeRem] = useState(0)
   const cartStateChange =()=>{
@@ -28,6 +29,10 @@ function App() {
     // console.log("State Changed to: ",cartState)
   }
   useEffect(() => {
+    if(!localStorage.getItem('isLogin')){
+      // history('/login', { replace: true })
+
+    }
     let ctim = new Date()
     let timRem = Math.abs(ctim.getMinutes() - parseInt(localStorage.getItem('time')))
     console.log("Remaning time : ",timRem)
@@ -53,6 +58,8 @@ function App() {
         <></>
       }
       <Routes>
+        {(userCtx.isLogin)?
+        <>
         <Route path="/" element={<Home/>}t ></Route>
         <Route path="/products" element={<Products/>} ></Route>
         <Route path="/about" element={<About/>} ></Route>
@@ -61,7 +68,14 @@ function App() {
         { !userCtx.isLogin && <Route path="/login" element={<LoginPage/>} ></Route>}
         <Route path="*" element={<Navigate to='/'/>} ></Route>
         <Route path="/products/:productID" element={<ProductDetails/>} ></Route>
-      </Routes>
+        </>
+        :
+        <>
+        <Route path="/login" element={<LoginPage/>} ></Route>
+        <Route path="*" element={<Navigate to='/login'/>} ></Route>
+        </>
+        }
+        </Routes>
       <Footer/>
     </BrowserRouter>
   )
