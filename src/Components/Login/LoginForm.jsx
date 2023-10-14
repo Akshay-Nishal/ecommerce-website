@@ -2,19 +2,58 @@ import { useState, useRef, useContext } from 'react';
 import classes from './LoginForm.module.css';
 import { UserContext } from '../../Context/UserContext';
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { CartContext } from '../../Context/CartContext';
+
 // import { unstable_HistoryRouter } from 'react-router-dom';
 const API_KEY = 'AIzaSyD_wbBxYY-wn1p-CwM8sMA8OSqKorbLUSI'
+const urlf = 'https://crudcrud.com/api/61e24d3555214211b01f03433130d1f7'
+
 
 
 const LoginForm = () => {
   // const history = unstable_HistoryRouter()
   const history = useNavigate()
+  const cartCtx = useContext(CartContext)
   const userCtx = useContext(UserContext)
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading,setLoading] = useState(false)
   const [isError,setError] = useState()
   const emailInputRef = useRef()
   const passInputRef = useRef()
+
+  const getonlineData =(mail)=>{
+    let data = []
+    console.log(mail)
+    axios.get(`${urlf}/${mail}`).then(res=>{
+      data = res.data
+      console.log("Data Len : ",data.length)
+      if(data.length<1){
+        axios.post(`${urlf}/${mail}`,{
+          cart:{
+            items:[],
+            totalCartAmount:0,
+            cartNumber:0
+        }
+        }).then(res=>{
+          console.log(res.data)
+          localStorage.setItem('currentUserApi',`${urlf}/${mail}`)
+          localStorage.setItem('urlDataId',res.data['_id'])
+          cartCtx.onLogin(res.data['cart'])
+          localStorage.setItem('currentCart',res.data['cart'])
+        })
+      }
+      if(data.length>0){
+        // console.log(data[1]._id)
+        // console.log(data[0]['_id'])
+        console.log((data[0]['cart']))
+        localStorage.setItem('urlDataId',data[0]['_id'])
+        localStorage.setItem('currentUserApi',`${urlf}/${mail}`)
+        cartCtx.onLogin(data[0]['cart'])
+        localStorage.setItem('currentCart',JSON.stringify(data[0]['cart']))
+      }
+    })
+  }
 
 
   const switchAuthModeHandler = () => {
@@ -52,13 +91,15 @@ const LoginForm = () => {
             }
         })
         .then(data=>{
-            console.log(data)
+            // console.log(data)
             userCtx.setlogin(true)
             userCtx.setCurrentUserData(data)
             localStorage.setItem('isLogin',true)
             localStorage.setItem('currentUserData',JSON.stringify(data))
+            localStorage.setItem('currentEmail',enteredEmail.replace("@",'').replace('.',''))
             var ctime = new Date()
             localStorage.setItem('time',ctime.getMinutes())
+            getonlineData(enteredEmail.replace("@",'').replace('.',''))
             history('/', { replace: true })
         })
         .catch(error=>{

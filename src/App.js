@@ -12,14 +12,12 @@ import ProductDetails from './Components/Body/ProductDetails';
 import LoginPage from './Components/Login/LoginPage';
 import ProfilePage from './Components/Profile/ProfilePage';
 import { UserContext } from './Context/UserContext';
-
-
-
-
+import { CartContext } from './Context/CartContext';
 
 
 function App() {
   const userCtx = useContext(UserContext)
+  const cartCtx = useContext(CartContext)
   // const history = useNavigate()
 
   const [cartState,setCartState] = useState(false)
@@ -36,7 +34,7 @@ function App() {
     let ctim = new Date()
     let timRem = Math.abs(ctim.getMinutes() - parseInt(localStorage.getItem('time')))
     console.log("Remaning time : ",timRem)
-    if(timRem>5){
+    if(timRem>50){
       userCtx.setlogin(false)
       userCtx.setCurrentUserData('')
       localStorage.clear()
@@ -44,6 +42,10 @@ function App() {
     else if(localStorage.getItem('isLogin') && localStorage.getItem('currentUserData')){
       userCtx.setlogin(localStorage.getItem('isLogin'))
       userCtx.setCurrentUserData(JSON.parse(localStorage.getItem('currentUserData')))
+      console.log(localStorage.getItem('urlDataId'))
+      console.log(localStorage.getItem('currentUserApi'))
+      console.log(JSON.parse(localStorage.getItem('currentCart')))
+      cartCtx.onLogin(JSON.parse(localStorage.getItem('currentCart')))
     }
   }, [])
   
@@ -82,3 +84,6 @@ function App() {
 }
 
 export default App;
+
+
+
